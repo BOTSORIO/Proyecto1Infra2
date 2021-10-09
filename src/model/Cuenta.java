@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Cuenta implements Serializable {
 
@@ -9,7 +10,7 @@ public class Cuenta implements Serializable {
 	private int numeroCuenta;
 	private String usuario;
 	private double saldo;
-	private Apuesta apuesta;
+	private ArrayList<Apuesta> apuestas;
 	
 	/**
 	 * @param numeroCuenta
@@ -19,7 +20,22 @@ public class Cuenta implements Serializable {
 		this.numeroCuenta = numeroCuenta;
 		this.usuario = usuario;
 		this.saldo=0;
+		this.apuestas = new ArrayList<>();
+	
 	}
+	
+	public Cuenta(String usuario,double saldo) {
+		this.usuario = usuario;
+		this.saldo=0;
+		this.apuestas = new ArrayList<>();
+	}
+	
+	public Cuenta() {
+		
+		this.saldo=0;
+		this.apuestas = new ArrayList<>();
+	}
+
 
 	/**
 	 * @return the numeroCuenta
@@ -55,6 +71,8 @@ public class Cuenta implements Serializable {
 	public double getSaldo() {
 		return saldo;
 	}
+	
+	
 
 	/**
 	 * @param saldo the saldo to set
@@ -62,23 +80,27 @@ public class Cuenta implements Serializable {
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
+	
+
 
 	/**
-	 * @return the apuesta
+	 * @return the apuestas
 	 */
-	public Apuesta getApuesta() {
-		return apuesta;
+	public ArrayList<Apuesta> getApuestas() {
+		return apuestas;
 	}
 
 	/**
-	 * @param apuesta the apuesta to set
+	 * @param apuestas the apuestas to set
 	 */
-	public void setApuesta(Apuesta apuesta) {
-		this.apuesta = apuesta;
+	public void setApuestas(ArrayList<Apuesta> apuestas) {
+		this.apuestas = apuestas;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Cuenta [numeroCuenta=" + numeroCuenta + ", usuario=" + usuario + ", saldo=" + saldo + "]";
+	}
 	
 	
 }

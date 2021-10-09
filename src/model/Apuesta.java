@@ -6,8 +6,8 @@ public class Apuesta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String numeroCuenta;
-	private char tipo;
+	private int numeroCuenta;
+	private String tipo;
 	private int numeroApuesta;
 	
 	
@@ -17,18 +17,21 @@ public class Apuesta implements Serializable{
 	 * @param tipo
 	 * @param numeroApuesta
 	 */
-	public Apuesta(String numeroCuenta, char tipo, int numeroApuesta) {
+	public Apuesta(int numeroCuenta, String tipo, int numeroApuesta) {
 		super();
 		this.numeroCuenta = numeroCuenta;
 		this.tipo = tipo;
 		this.numeroApuesta = numeroApuesta;
 	}
 
+	public Apuesta() {
+
+	}
 
 	/**
 	 * @return the numeroCuenta
 	 */
-	public String getNumeroCuenta() {
+	public int getNumeroCuenta() {
 		return numeroCuenta;
 	}
 
@@ -36,7 +39,7 @@ public class Apuesta implements Serializable{
 	/**
 	 * @param numeroCuenta the numeroCuenta to set
 	 */
-	public void setNumeroCuenta(String numeroCuenta) {
+	public void setNumeroCuenta(int numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
 	}
 
@@ -44,7 +47,7 @@ public class Apuesta implements Serializable{
 	/**
 	 * @return the tipo
 	 */
-	public char getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
@@ -52,7 +55,7 @@ public class Apuesta implements Serializable{
 	/**
 	 * @param tipo the tipo to set
 	 */
-	public void setTipo(char tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
