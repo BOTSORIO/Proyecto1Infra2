@@ -53,8 +53,6 @@ public class mainServer {
 					numeroCuenta = Integer.parseInt(datos[1]);
 					respuesta = EchoTCPServerProtocol.cancelarCuenta(numeroCuenta);
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
-					// String cuentasA = EchoTCPServerProtocol.mostrarCuentas();
-					// System.out.println(cuentasA);
 					break;
 
 				case "DEPOSITAR":
@@ -80,18 +78,21 @@ public class mainServer {
 					respuesta = EchoTCPServerProtocol.retirar(numeroCuenta, valor);
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
 					break;
-//
-//				case "TRASLADAR":
-//					int numeroCuentaT = Integer.parseInt(ArrayDatos[1]);
-//					double valorT = Double.parseDouble(ArrayDatos[2]);
-//					String respuesta7 = EchoTCPServerProtocol.trasladarDineroBolsillo(numeroCuentaT, valorT);
-//					EchoTCPServerProtocol.toNetwork.println(respuesta7);
-//					break;
-//
+
 				case "CONSULTAR_SALDO":
 
 					numeroCuenta = Integer.parseInt(datos[1]);
 					respuesta = EchoTCPServerProtocol.consultar(numeroCuenta);
+					EchoTCPServerProtocol.toNetwork.println(respuesta);
+					break;
+					
+				case "CERRAR":
+					
+					
+					respuesta= EchoTCPServerProtocol.cerrarApuestas();
+					
+					
+					
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
 					break;
 //

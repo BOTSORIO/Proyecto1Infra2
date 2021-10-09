@@ -75,4 +75,11 @@ public class Apuesta implements Serializable{
 		this.numeroApuesta = numeroApuesta;
 	}
 
+	@Override
+	public String toString() {
+		return "Apuesta [numeroCuenta=" + numeroCuenta + ", tipo=" + tipo + ", numeroApuesta=" + numeroApuesta + "]";
+	}
+	
+	
+
 }

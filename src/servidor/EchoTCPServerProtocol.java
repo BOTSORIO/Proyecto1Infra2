@@ -26,6 +26,8 @@ public class EchoTCPServerProtocol {
 
 	private static ArrayList<Apuesta> apuestasCasa = new ArrayList<Apuesta>();
 
+	private static Boolean abiertaCerrado= false;
+
 	public static void protocol(Socket socket) throws IOException {
 		createStreams(socket);
 		mainServer.leerOpcionCliente();
@@ -69,91 +71,91 @@ public class EchoTCPServerProtocol {
 		double saldoCasa = 0.0;
 		
 		char n[] = numeroApuesta.toCharArray();
-		int a[]= new int[4];	
 		
-		for(int i=0; i<numeroApuesta.length();i++) {
+		if(abiertaCerrado==false) {
 			
-			a[i]= Integer.parseInt(String.valueOf(n[i]));
-		}
-		
-		
-		for (Cuenta cuenta : cuentas.values()) {
+			for (Cuenta cuenta : cuentas.values()) {
 
-			if (cuenta.getNumeroCuenta() == numeroCuenta) {
+				if (cuenta.getNumeroCuenta() == numeroCuenta) {
 
-				if(cuenta.getSaldo()>=10000){
-					
-					switch (tipo) {
-					
-						case "A":
-							
-							numApuesta = Integer.parseInt(numeroApuesta);
-							
-							apuesta.setNumeroCuenta(numeroCuenta);
-							apuesta.setTipo(tipo);
-							apuesta.setNumeroApuesta(numApuesta);
-													
-							cuenta.getApuestas().add(apuesta);
-							saldoCuenta = cuenta.getSaldo()-10000;
-							saldoCasa = cuentaInicio.getSaldo()+ 10000;
-							
-							cuentaInicio.setSaldo(saldoCasa);
-							cuenta.setSaldo(saldoCuenta);
-							apuestasCasa.add(apuesta);
-							break;
-							
-						case "B":
-							
-							for(int i=1;i<a.length;i++) {
+					if(cuenta.getSaldo()>=10000){
+						
+						switch (tipo) {
+						
+							case "A":
 								
-								num += a[i];
-							}
-							
-							numApuesta = Integer.parseInt(num);
-							
-							apuesta.setNumeroCuenta(numeroCuenta);
-							apuesta.setTipo(tipo);
-							apuesta.setNumeroApuesta(numApuesta);
-							
-							cuenta.getApuestas().add(apuesta);
-							
-							saldoCuenta = cuenta.getSaldo()-10000;
-							saldoCasa = cuentaInicio.getSaldo()+ 10000;
-							
-							cuentaInicio.setSaldo(saldoCasa);
-							cuenta.setSaldo(saldoCuenta);
-							apuestasCasa.add(apuesta);	
-							break;
-							
-						case "C":
-							
-							for(int i=2;i<a.length;i++) {
+								numApuesta = Integer.parseInt(numeroApuesta);
 								
-								num += a[i];
-							}
-							
-							numApuesta = Integer.parseInt(num);
-							
-							apuesta.setNumeroCuenta(numeroCuenta);
-							apuesta.setTipo(tipo);
-							apuesta.setNumeroApuesta(numApuesta);
-							
-							cuenta.getApuestas().add(apuesta);
-							saldoCuenta = cuenta.getSaldo()-10000;
-							saldoCasa = cuentaInicio.getSaldo()+ 10000;
-							
-							cuentaInicio.setSaldo(saldoCasa);
-							cuenta.setSaldo(saldoCuenta);
-							apuestasCasa.add(apuesta);	
-							break;
-							
+								apuesta.setNumeroCuenta(numeroCuenta);
+								apuesta.setTipo(tipo);
+								apuesta.setNumeroApuesta(numApuesta);
+														
+								cuenta.getApuestas().add(apuesta);
+								saldoCuenta = cuenta.getSaldo()-10000;
+								saldoCasa = cuentaInicio.getSaldo()+ 10000;
+								
+								cuentaInicio.setSaldo(saldoCasa);
+								cuenta.setSaldo(saldoCuenta);
+								apuestasCasa.add(apuesta);
+								break;
+								
+							case "B":
+								
+								for(int i=1;i<n.length;i++) {
+									
+									num += String.valueOf(n[i]);
+								}
+								
+								numApuesta = Integer.parseInt(num);
+								
+								apuesta.setNumeroCuenta(numeroCuenta);
+								apuesta.setTipo(tipo);
+								apuesta.setNumeroApuesta(numApuesta);
+								
+								cuenta.getApuestas().add(apuesta);
+								
+								saldoCuenta = cuenta.getSaldo()-10000;
+								saldoCasa = cuentaInicio.getSaldo()+ 10000;
+								
+								cuentaInicio.setSaldo(saldoCasa);
+								cuenta.setSaldo(saldoCuenta);
+								apuestasCasa.add(apuesta);	
+								break;
+								
+							case "C":
+								
+								for(int i=2;i<n.length;i++) {
+									
+									num += String.valueOf(n[i]);
+								}
+								
+								numApuesta = Integer.parseInt(num);
+								
+								apuesta.setNumeroCuenta(numeroCuenta);
+								apuesta.setTipo(tipo);
+								apuesta.setNumeroApuesta(numApuesta);
+								
+								cuenta.getApuestas().add(apuesta);
+								saldoCuenta = cuenta.getSaldo()-10000;
+								saldoCasa = cuentaInicio.getSaldo()+ 10000;
+								
+								cuentaInicio.setSaldo(saldoCasa);
+								cuenta.setSaldo(saldoCuenta);
+								apuestasCasa.add(apuesta);	
+								break;
+								
+						}
+					}else {
+						return "Saldo insuficiente";
 					}
-				}else {
-					return "Saldo insuficiente";
+					return "Apuesta Exitosa";
 				}
-				return "Apuesta Exitosa";
 			}
+			
+		}else {
+			return "El servicio de apuestas esta cerrado";
 		}
+		
 			
 		return "La cuenta no existe";
 	}
@@ -232,6 +234,28 @@ public class EchoTCPServerProtocol {
 		return "La cuenta no existe";
 	}
 	
+	public static String cerrarApuestas() {
+	
+		String mensaje="";
+		
+		if(apuestasCasa.isEmpty()) {
+			
+			toNetwork.println("¿Esta seguro que desea cerrar las apuestas?");
+			
+			if(mensaje.equals("SI")) {
+				abiertaCerrado=true;
+				return "Las apuestas se cerraron exitosamente";		
+			}
+			
+		}else {
+			
+			abiertaCerrado=true;
+			return "Las apuestas se cerraron exitosamente";			
+		}
+		
+		return "";
+		
+	}
 	
 	public static String consultar(int numCuenta) {
 		
@@ -242,12 +266,10 @@ public class EchoTCPServerProtocol {
 				double saldoCuenta = cuenta.getSaldo();
 
 				return "El saldo de la cuenta es de: " + saldoCuenta;
-
 			}
 		}
-
 		return "La cuenta no existe";
-		
 	}
-
+	
+	
 }
