@@ -88,8 +88,6 @@ public class EchoTCPServerProtocol {
 		
 		char n[] = numeroApuesta.toCharArray();
 		
-		System.out.println(n.length);
-		
 		if(abiertaCerrado==false) {
 			
 			for (Cuenta cuenta : cuentas.values()) {
@@ -201,13 +199,6 @@ public class EchoTCPServerProtocol {
 						return "Saldo insuficiente";
 					}
 					
-					Transaccion transaccion = new Transaccion();
-					transaccion.setCuenta(cuenta);
-					transaccion.setServicio("APOSTAR");
-					transaccion.setTipo(apuesta.getTipo());
-					transaccion.setNumApuesta(apuesta.getNumeroApuesta());
-					transacciones.add(transaccion);
-					
 					return "Apuesta Exitosa";
 				}
 			}
@@ -265,7 +256,6 @@ public class EchoTCPServerProtocol {
 				Transaccion transaccion = new Transaccion(cuenta, "DEPOSITAR",cuenta.getNumeroCuenta());
 				transacciones.add(transaccion);
 
-
 				return "Deposito Exitoso, su nuevo saldo es de: " + "$" + cuenta.getSaldo();
 			}
 		}
@@ -273,6 +263,7 @@ public class EchoTCPServerProtocol {
 		return "La cuenta no existe";
 	}
 
+	
 	public static String retirar(int numeroCuenta, double saldo) {
 
 		double saldoCuenta = 0.0;
@@ -295,8 +286,6 @@ public class EchoTCPServerProtocol {
 				Transaccion transaccion = new Transaccion(cuenta, "RETIRAR",cuenta.getNumeroCuenta());
 				transacciones.add(transaccion);
 
-				System.out.println(cuentas.toString());
-
 				return "Retiro Exitoso, su nuevo saldo es de: " + "$" + cuenta.getSaldo();
 			}
 		}
@@ -304,40 +293,6 @@ public class EchoTCPServerProtocol {
 		return "La cuenta no existe";
 	}
 	
-//	public static String cerrarApuestas() {
-//		
-//		String confirmacion="";
-//		
-//		try {
-//			
-//            if(!abiertaCerrado){
-//            	
-//                if(apuestasCasa.isEmpty()){
-//                	
-//                    toNetwork.println("¿Está seguro de cerrar las apuestas?");
-//                    confirmacion = fromNetwork.readLine();
-//
-//                    if(confirmacion.equals("SI")){
-//                    	
-//                    	abiertaCerrado=true;
-//                    	
-//                        return "Cierre de apuestas hecho";
-//                    }
-//                    else return "Cierre de apuestas cancelado";
-//
-//                }else{
-//                    return "La casa ha cerrado su recepción de apuestas";
-//                }
-//            }else{
-//                return "Las apuestas ya se encontraban cerradas";
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//		
-//		return "";
-//		
-//	}
 	
 	
 	 public static String cerrarApuestas(){
@@ -391,8 +346,7 @@ public class EchoTCPServerProtocol {
 				
 			}
 		}
-		
-		
+
 		return "La cuenta no existe";
 	}
 	
@@ -416,8 +370,8 @@ public class EchoTCPServerProtocol {
 					cantidadC++;
 				}
 			}
-			
 		}
+		
 		
 		Transaccion transaccion = new Transaccion("REPORTAR");
 		transacciones.add(transaccion);
@@ -433,7 +387,6 @@ public class EchoTCPServerProtocol {
 		}else {
 			return "No hay apuestas registradas";
 		}
-		
 		
 		return reporte;
 		
@@ -621,7 +574,7 @@ public class EchoTCPServerProtocol {
 							totalM = cuentaInicio.getSaldo()-pagar;
 							cuentaInicio.setSaldo(totalM);
 							
-							apuestasCasa.remove(apuesta);
+							apuestasCasa.clear();
 							
 							Transaccion transaccion = new Transaccion("SORTEO");
 							transacciones.add(transaccion);

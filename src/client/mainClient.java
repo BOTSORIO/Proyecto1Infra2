@@ -28,7 +28,7 @@ public class mainClient {
 		String fromServer="";
 		String fromUser="";
 
-		int opcion; // Guardaremos la opcion del usuario
+		int opcion; 
 
 		while (!salir) {
 			System.out.println();
@@ -65,13 +65,12 @@ public class mainClient {
 						System.out.println();
 						
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println(fromServer);
 						reiniciarConexion();
 
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-
 					break;
 
 				case 2:
@@ -93,7 +92,7 @@ public class mainClient {
 						System.out.println();
 
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println(fromServer);
 
 						reiniciarConexion();
 
@@ -113,7 +112,6 @@ public class mainClient {
 						
 						fromUser = "CERRAR";
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
-						System.out.println();
 						
 						fromServer =EchoTCPClientProtocol.fromNetwork2.readLine();
 						
@@ -129,13 +127,13 @@ public class mainClient {
 							System.out.println();
 
 							fromServer6 = EchoTCPClientProtocol.fromNetwork.readLine();
-							System.out.println("[Client] From server: " + fromServer6);
+							System.out.println(fromServer6);
 							
 							reiniciarConexion();
 						
 						}else {
 							
-							System.out.println("[Client] From server: " + fromServer);
+							System.out.println(fromServer);
 							reiniciarConexion();
 						}
 						
@@ -191,7 +189,7 @@ public class mainClient {
 						System.out.println();
 
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println( fromServer);
 
 						reiniciarConexion();
 
@@ -214,7 +212,7 @@ public class mainClient {
 						System.out.println();
 
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println(fromServer);
 
 						reiniciarConexion();
 
@@ -226,7 +224,7 @@ public class mainClient {
 				case 7:
 
 					try {
-						System.out.println("Ingrese el numero de la cuenta de ahorros: ");
+						System.out.println("Ingrese el numero de la cuenta: ");
 						int numCuenta = sn.nextInt();
 						sn.nextLine();
 
@@ -239,7 +237,7 @@ public class mainClient {
 						System.out.println();
 
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println(fromServer);
 
 						reiniciarConexion();
 
@@ -252,7 +250,7 @@ public class mainClient {
 				case 8:
 
 					try {
-						System.out.println("Ingrese el numero de la cuenta de ahorros: ");
+						System.out.println("Ingrese el numero de la cuenta: ");
 						int numCuentaR = sn.nextInt();
 						sn.nextLine();
 
@@ -266,7 +264,7 @@ public class mainClient {
 
 						String fromServer2;
 						fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer2);
+						System.out.println(fromServer2);
 
 						reiniciarConexion();
 
@@ -279,7 +277,7 @@ public class mainClient {
 				case 9:
 
 					try {
-						System.out.println("Ingrese el numero de cuenta o del bolsillo: ");
+						System.out.println("Ingrese el numero de cuenta: ");
 						String cuenta = sn.nextLine();
 
 						fromUser = "CONSULTAR_SALDO" + "," + cuenta;
@@ -288,7 +286,7 @@ public class mainClient {
 						System.out.println();
 
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
-						System.out.println("[Client] From server: " + fromServer);
+						System.out.println(fromServer);
 
 						reiniciarConexion();
 

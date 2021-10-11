@@ -32,7 +32,7 @@ public class mainServer {
 			message = EchoTCPServerProtocol.fromNetwork.readLine();
 			System.out.println("[Server] From client: " + message);
 
-			if (!message.equalsIgnoreCase("diez")) {
+			if (!message.equalsIgnoreCase("once")) {
 
 				String[] datos = message.split(",");
 
