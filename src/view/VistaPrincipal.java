@@ -186,6 +186,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 				try {
 
@@ -255,6 +256,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 
 				try {
@@ -302,6 +304,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 				try {
 
@@ -352,10 +355,11 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 				try {
 
-					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta a cancelar: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
+					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta a depositar: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
 					String valorDeposito = (String) JOptionPane.showInputDialog(null, "Ingrese el valor a depositar","Valor de deposito",JOptionPane.PLAIN_MESSAGE,icon4,null,null);
 
 					if (numCuenta != null && valorDeposito != null && !numCuenta.isEmpty() && !valorDeposito.isEmpty()) {
@@ -400,6 +404,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 				
 				try {
 
@@ -444,6 +449,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 				
 				try {
 
@@ -489,6 +495,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 				try {
 
 					init();
@@ -526,6 +533,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 				
 				String fromServer="";
@@ -590,6 +598,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 
 				try {
 
@@ -642,7 +651,7 @@ public class VistaPrincipal {
 				UIManager.put("Panel.background",new Color(180, 170, 160));
 				UIManager.put("Button.background", Color.white);
 				UIManager.put("OptionPane.okButtonText","Aceptar");
-
+				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 				
 				try {
 					//String nombreCliente = JOptionPane.showInputDialog(null, "<html><p style=\"color:gray \">Ingrese su nombre</p></html>");

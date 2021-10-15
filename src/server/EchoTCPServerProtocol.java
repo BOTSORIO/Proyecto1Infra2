@@ -354,20 +354,20 @@ public class EchoTCPServerProtocol {
 	public static String reporteApuestas() {
 		
 		String reporte="";
-		int cantidadA=0;
-		int cantidadB=0;
-		int cantidadC=0;
+		double recaudoA=0.0;
+		double recaudoB=0.0;
+		double recaudoC=0.0;
 		int i=0;
 		
-		for(Apuesta apuesta : apuestasCasa.keySet()) {
-			
-			if(apuesta.getTipo().equals("A")) {
-				cantidadA++;
-			}else {
-				if(apuesta.getTipo().equals("B")) {
-					cantidadB++;
-				}else {
-					cantidadC++;
+		for (Apuesta apuesta : apuestasCasa.keySet()) {
+
+			if (apuesta.getTipo().equals("A")) {
+				recaudoA = recaudoA + 10000;
+			} else {
+				if (apuesta.getTipo().equals("B")) {
+					recaudoB = recaudoB + 10000;
+				} else {
+					recaudoC = recaudoC + 10000;
 				}
 			}
 		}
@@ -381,9 +381,10 @@ public class EchoTCPServerProtocol {
 			for(Cuenta cuenta : apuestasCasa.values()) {
 				
 				reporte += cuenta.getUsuario() + ","+ cuenta.getApuestas().get(i).getTipo()+"," + cuenta.getApuestas().get(i).getNumeroApuesta()+"-";
+				
 			}
 			
-			reporte += "Apuestas tipo A: " + Integer.toString(cantidadA) +"-" + "Apuestas tipo B: " + Integer.toString(cantidadB) +"-" + "Apuestas tipo C: " + Integer.toString(cantidadC);
+			reporte += "Recaudo de tipo A: " + String.valueOf(recaudoA) +"-" + "Recaudo de tipo B: " + String.valueOf(recaudoB) +"-" + "Recaudos de tipo C: " + String.valueOf(recaudoC);
 		}else {
 			return "No hay apuestas registradas";
 		}
