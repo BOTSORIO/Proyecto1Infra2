@@ -158,6 +158,12 @@ public class mainClient {
 						
 						String reportes[] = aux.split("-");
 						
+						for(int j=0;j<reportes.length;j++) {
+							
+							System.out.println(reportes[j]);;
+						}
+						
+						
 						for(int i=0;i<reportes.length;i++) {
 							
 							reporte += reportes[i] +"\n";

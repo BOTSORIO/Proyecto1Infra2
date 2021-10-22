@@ -190,7 +190,7 @@ public class VistaPrincipal {
 
 				try {
 
-					String nombreArchivo = (String) JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo que desea enviarr: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon,null, null);
+					String nombreArchivo = (String) JOptionPane.showInputDialog(null,"Ingrese el nombre del archivo que desea enviar: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon,null, null);
 
 
 					if (nombreArchivo != null) {
@@ -261,7 +261,7 @@ public class VistaPrincipal {
 
 				try {
 
-					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta a cancelar: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
+					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
 
 					if (numCuenta != null && !numCuenta.isEmpty()) {
 						init();
@@ -308,7 +308,7 @@ public class VistaPrincipal {
 
 				try {
 
-					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta a cancelar: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
+					String numCuenta = (String) JOptionPane.showInputDialog(null,"Ingrese el numero de la cuenta: ", "Cuenta", JOptionPane.PLAIN_MESSAGE, icon2,null, null);
 					String valor = (String) JOptionPane.showInputDialog(null, "Ingrese el valor a depositar","Valor de deposito",JOptionPane.PLAIN_MESSAGE,icon4,null,null);
 
 					if (numCuenta != null && valor != null && !numCuenta.isEmpty() && !valor.isEmpty()) {
@@ -574,7 +574,7 @@ public class VistaPrincipal {
 					
 					}else {
 						
-						System.out.println("[Client] From server: " + fromServer);
+						JOptionPane.showMessageDialog(null, fromServer2, "Verificación", JOptionPane.PLAIN_MESSAGE, icon3);	
 						cerrar();
 					}
 					
@@ -603,9 +603,9 @@ public class VistaPrincipal {
 				try {
 
 					String numCuenta = (String) JOptionPane.showInputDialog(null, "Ingrese el numero de la cuenta:","Cuenta",JOptionPane.PLAIN_MESSAGE,icon2,null,null);
-					String numeroApuesta = (String) JOptionPane.showInputDialog(null, "Ingrese el numero a apostar:","Apuesta",JOptionPane.PLAIN_MESSAGE,icon4,null,null);
 					String tipoApuesta = (String) JOptionPane.showInputDialog(null,"Ingrese el tipo de la apuesta:","Apuesta",JOptionPane.PLAIN_MESSAGE,icon5,null,null);
-
+					String numeroApuesta = (String) JOptionPane.showInputDialog(null, "Ingrese el numero a apostar:","Apuesta",JOptionPane.PLAIN_MESSAGE,icon4,null,null);
+					
 					if (numCuenta != null && numeroApuesta!= null && tipoApuesta!=null) {
 						if (!numCuenta.isEmpty() && !numeroApuesta.isEmpty() && !tipoApuesta.isEmpty()) {
 
@@ -654,7 +654,6 @@ public class VistaPrincipal {
 				UIManager.put("OptionPane.cancelButtonText","Cancelar");
 				
 				try {
-					//String nombreCliente = JOptionPane.showInputDialog(null, "<html><p style=\"color:gray \">Ingrese su nombre</p></html>");
 					String nombreCliente= (String) JOptionPane.showInputDialog(null,"Ingrese su nombre: ","Crear cuenta",JOptionPane.PLAIN_MESSAGE,icon2,null,null);
 			
 					if (nombreCliente != null) {

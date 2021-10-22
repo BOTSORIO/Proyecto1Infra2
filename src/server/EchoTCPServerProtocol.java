@@ -357,7 +357,6 @@ public class EchoTCPServerProtocol {
 		double recaudoA=0.0;
 		double recaudoB=0.0;
 		double recaudoC=0.0;
-		int i=0;
 		
 		for (Apuesta apuesta : apuestasCasa.keySet()) {
 
@@ -376,18 +375,25 @@ public class EchoTCPServerProtocol {
 		Transaccion transaccion = new Transaccion("REPORTAR");
 		transacciones.add(transaccion);
 		
-		if(!apuestasCasa.isEmpty()) {
+		if(!cuentas.isEmpty()) {
 			
-			for(Cuenta cuenta : apuestasCasa.values()) {
+			for(Cuenta cuenta : cuentas.values()) {
+						
+				if(cuenta.getApuestas().size() !=0) {
 				
-				reporte += cuenta.getUsuario() + ","+ cuenta.getApuestas().get(i).getTipo()+"," + cuenta.getApuestas().get(i).getNumeroApuesta()+"-";
-				
+					for(int j=0 ; j< cuenta.getApuestas().size();j++) {
+						
+						reporte += cuenta.getUsuario() + ","+ cuenta.getApuestas().get(j).getTipo()+"," + cuenta.getApuestas().get(j).getNumeroApuesta()+"-";
+					}
+				}
 			}
-			
+
 			reporte += "Recaudo de tipo A: " + String.valueOf(recaudoA) +"-" + "Recaudo de tipo B: " + String.valueOf(recaudoB) +"-" + "Recaudos de tipo C: " + String.valueOf(recaudoC);
 		}else {
 			return "No hay apuestas registradas";
 		}
+		
+		System.out.println(reporte);
 		
 		return reporte;
 		
@@ -522,91 +528,98 @@ public class EchoTCPServerProtocol {
 		double totalM =0.0;
 		int cantidadGanadores=0;
 		ArrayList<Cuenta> cuentasGanadoras = new ArrayList<>();
-
-		for(Apuesta apuesta : apuestasCasa.keySet()) {
-			
-			if(apuesta.getTipo().equals("A")) {
-				recaudoA = recaudoA +10000;
-			}else {
-				if(apuesta.getTipo().equals("B")) {
-					recaudoB = recaudoB + 10000;
-				}else {
-					recaudoC = recaudoC + 10000;
-				}
-			}
-		}
 		
-		for(Cuenta cuenta : apuestasCasa.values()) {
-			
-			for(Apuesta apuesta : apuestasCasa.keySet()) {
-				
-				if(cuenta.getNumeroCuenta() == apuesta.getNumeroCuenta()) {
-									
-					if(apuesta.getNumeroApuesta() == numeroGanador) {
-						
-						cantidadGanadores++;
-						cuentasGanadoras.add(cuenta);
+		
+		if (abiertaCerrado == true) {
+
+			for (Apuesta apuesta : apuestasCasa.keySet()) {
+
+				if (apuesta.getTipo().equals("A")) {
+					recaudoA = recaudoA + 10000;
+				} else {
+					if (apuesta.getTipo().equals("B")) {
+						recaudoB = recaudoB + 10000;
+					} else {
+						recaudoC = recaudoC + 10000;
 					}
 				}
-			}	
-		}
-		
-		for(Cuenta cuenta : apuestasCasa.values()) {
-			
-			for(Apuesta apuesta : apuestasCasa.keySet()) {
-				
-				if(cuenta.getNumeroCuenta() == apuesta.getNumeroCuenta()) {
-									
-					if(apuesta.getNumeroApuesta() == numeroGanador) {
-						
-						if(cantidadGanadores >0) {
-							
-							pagar = (recaudoA * 0.8)+(recaudoB*0.7)+(recaudoC*0.6);
-							
-							totalVarios = pagar / cantidadGanadores;
-							
-							for(int i=0; i<cuentasGanadoras.size();i++) {
-								
-								total=cuentasGanadoras.get(i).getSaldo()+ totalVarios;
-							
-								cuentasGanadoras.get(i).setSaldo(total);
-							}
-							
-							totalM = cuentaInicio.getSaldo()-pagar;
-							cuentaInicio.setSaldo(totalM);
-							
-							apuestasCasa.clear();
-							
-							Transaccion transaccion = new Transaccion("SORTEO");
-							transacciones.add(transaccion);
-							
-							return "Felicitaciones por ganar " + cuenta.getUsuario();
-							
-						}else {
-						
-							pagar = (recaudoA * 0.8)+(recaudoB*0.7)+(recaudoC*0.6);
-							
-							total = cuenta.getSaldo() + pagar;
-							totalM = cuentaInicio.getSaldo()-pagar;
-							
-							cuenta.setSaldo(total);
-							cuentaInicio.setSaldo(totalM);
-							
-							apuestasCasa.remove(apuesta);
-							
-							Transaccion transaccion = new Transaccion("SORTEO");
-							transacciones.add(transaccion);
-							
-							return "Felicitaciones por ganar " + cuenta.getUsuario();
+			}
+
+			for (Cuenta cuenta : apuestasCasa.values()) {
+
+				for (Apuesta apuesta : apuestasCasa.keySet()) {
+
+					if (cuenta.getNumeroCuenta() == apuesta.getNumeroCuenta()) {
+
+						if (apuesta.getNumeroApuesta() == numeroGanador) {
+
+							cantidadGanadores++;
+							cuentasGanadoras.add(cuenta);
 						}
 					}
 				}
-			}	
+			}
+
+			for (Cuenta cuenta : apuestasCasa.values()) {
+
+				for (Apuesta apuesta : apuestasCasa.keySet()) {
+
+					if (cuenta.getNumeroCuenta() == apuesta.getNumeroCuenta()) {
+
+						if (apuesta.getNumeroApuesta() == numeroGanador) {
+
+							if (cantidadGanadores > 0) {
+
+								pagar = (recaudoA * 0.8) + (recaudoB * 0.7) + (recaudoC * 0.6);
+
+								totalVarios = pagar / cantidadGanadores;
+
+								for (int i = 0; i < cuentasGanadoras.size(); i++) {
+
+									total = cuentasGanadoras.get(i).getSaldo() + totalVarios;
+
+									cuentasGanadoras.get(i).setSaldo(total);
+								}
+
+								totalM = cuentaInicio.getSaldo() - pagar;
+								cuentaInicio.setSaldo(totalM);
+
+								apuestasCasa.clear();
+
+								Transaccion transaccion = new Transaccion("SORTEO");
+								transacciones.add(transaccion);
+
+								return "Felicitaciones por ganar " + cuenta.getUsuario();
+
+							} else {
+
+								pagar = (recaudoA * 0.8) + (recaudoB * 0.7) + (recaudoC * 0.6);
+
+								total = cuenta.getSaldo() + pagar;
+								totalM = cuentaInicio.getSaldo() - pagar;
+
+								cuenta.setSaldo(total);
+								cuentaInicio.setSaldo(totalM);
+
+								apuestasCasa.remove(apuesta);
+
+								Transaccion transaccion = new Transaccion("SORTEO");
+								transacciones.add(transaccion);
+
+								return "Felicitaciones por ganar " + cuenta.getUsuario();
+							}
+						}
+					}
+				}
+			}
+
+		} else {
+			return "Primero se deben cerrar las apuestas";
 		}
-		
+
 		Transaccion transaccion = new Transaccion("SORTEO");
 		transacciones.add(transaccion);
-			
+
 		return "No hubo ganador alguno";
 	}
 	
