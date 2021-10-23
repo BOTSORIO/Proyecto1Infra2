@@ -234,7 +234,7 @@ public class EchoTCPServerProtocol {
 				return "Cuenta cancelada Exitosamente";
 			}
 		}
-		return "";
+		return "La cuenta no existe";
 	}
 
 	
@@ -257,6 +257,7 @@ public class EchoTCPServerProtocol {
 				transacciones.add(transaccion);
 
 				return "Deposito Exitoso, su nuevo saldo es de: " + "$" + cuenta.getSaldo();
+				
 			}
 		}
 
@@ -398,123 +399,6 @@ public class EchoTCPServerProtocol {
 		return reporte;
 		
 	}
-	
-	
-//	public static String sortearApuestas(int numeroGanador) {
-//		
-//		double recaudoA=0.0;
-//		double recaudoB=0.0;
-//		double recaudoC=0.0;
-//		double pagar = 0.0;
-//		double total=0.0;
-//		double totalM =0.0;
-//		char ganador[];
-//		boolean verificado= false;
-//		String num = null;
-//
-//		for(Apuesta apuesta : apuestasCasa.keySet()) {
-//			
-//			if(apuesta.getTipo().equals("A")) {
-//				recaudoA = recaudoA +10000;
-//			}else {
-//				if(apuesta.getTipo().equals("B")) {
-//					recaudoB = recaudoB + 10000;
-//				}else {
-//					recaudoC = recaudoC + 10000;
-//				}
-//			}
-//		}
-//		
-//		for(Cuenta cuenta : apuestasCasa.values()) {
-//			
-//			for(Apuesta apuesta : apuestasCasa.keySet()) {
-//				
-//				if(cuenta.getNumeroCuenta() == apuesta.getNumeroCuenta()) {
-//					
-//					char n[] = String.valueOf(apuesta.getNumeroApuesta()).toCharArray();
-//					
-//					if(n.length==4) {
-//						
-//						if(apuesta.getNumeroApuesta() == numeroGanador) {
-//							
-//							pagar = (recaudoA * 0.8)+(recaudoB*0.7)+(recaudoC*0.6);
-//							
-//							total = cuenta.getSaldo() + pagar;
-//							totalM = cuentaInicio.getSaldo()-pagar;
-//							
-//							cuenta.setSaldo(total);
-//							cuentaInicio.setSaldo(totalM);
-//							
-//							apuestasCasa.remove(apuesta);
-//							
-//							return "Felicitaciones por ganar " + cuenta.getUsuario();
-//							
-//						}
-//					}else {
-//						if(n.length==3) {
-//							
-//							ganador = String.valueOf(numeroGanador).toCharArray();
-//							
-//							for(int i=1;i<ganador.length;i++) {
-//								
-//								gans = null;
-//								gans[i-1] = ganador[i];
-//								
-//								for(int j=0;j<gans.length;i++) {
-//									
-//									num += String.valueOf(gans[i]);
-//								}
-//								
-//								int numV= Integer.parseInt(num);
-//								
-//								if(numV == apuesta.getNumeroApuesta()) {
-//									
-//									pagar = (recaudoA * 0.8)+(recaudoB*0.7)+(recaudoC*0.6);
-//									
-//									total = cuenta.getSaldo() + pagar;
-//									totalM = cuentaInicio.getSaldo()-pagar;
-//									
-//									cuenta.setSaldo(total);
-//									cuentaInicio.setSaldo(totalM);
-//									
-//									apuestasCasa.remove(apuesta);
-//									
-//									return "Felicitaciones por ganar " + cuenta.getUsuario();
-//								}
-//							}	
-//						}else {
-//							
-//							ganador = String.valueOf(numeroGanador).toCharArray();
-//							
-//							for(int i=2;i<ganador.length;i++) {
-//								
-//								if(ganador[i] == n[i-1]) {
-//									
-//									verificado=true;
-//								}
-//								
-//								if(verificado) {
-//									pagar = (recaudoA * 0.8)+(recaudoB*0.7)+(recaudoC*0.6);
-//									
-//									total = cuenta.getSaldo() + pagar;
-//									totalM = cuentaInicio.getSaldo()-pagar;
-//									
-//									cuenta.setSaldo(total);
-//									cuentaInicio.setSaldo(totalM);
-//									
-//									apuestasCasa.remove(apuesta);
-//									
-//									return "Felicitaciones por ganar " + cuenta.getUsuario();
-//								}
-//						}
-//					}
-//				}
-//			}
-//		}
-//		}
-//			
-//		return "No hubo ganador alguno";
-//	}
 	
 	
 	public static String sortearApuestas(int numeroGanador) {

@@ -574,7 +574,12 @@ public class VistaPrincipal {
 					
 					}else {
 						
-						JOptionPane.showMessageDialog(null, fromServer2, "Verificación", JOptionPane.PLAIN_MESSAGE, icon3);	
+						if(fromServer2.contains("Apuestas cerradas")) {
+							JOptionPane.showMessageDialog(null, fromServer2, "Verificación", JOptionPane.PLAIN_MESSAGE, icon2);
+						}else {
+							JOptionPane.showMessageDialog(null, fromServer2, "Verificación", JOptionPane.PLAIN_MESSAGE, icon3);	
+						}
+						
 						cerrar();
 					}
 					
