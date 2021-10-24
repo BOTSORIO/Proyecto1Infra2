@@ -21,6 +21,7 @@ public class mainServer {
 
 	public static String leerOpcionCliente() {
 		
+		//Se inicializan variables con valores "Vacios" para setearlas mas adelante de manera mas comoda.
 		String message = "";
 		int numeroCuenta=0;
 		double valor =0.0;
@@ -32,17 +33,18 @@ public class mainServer {
 			message = EchoTCPServerProtocol.fromNetwork.readLine();
 			System.out.println("[Server] From client: " + message);
 
-			if (!message.equalsIgnoreCase("once")) {
-
+			if (!message.equalsIgnoreCase("once")) { //El mensaje "once" se recibe unicamente cuando el cliente selecciona "SALIR"
+				
+				//Se dividen los datos recibidos en un arreglo, [CREAR_CUENTA][Juan Carlos]
 				String[] datos = message.split(",");
-
+				
+				//La opcion corresponde al primer dato recibido, y se usara en el switch
 				String opcion = datos[0];
 				System.out.println(opcion);
 				
 				switch (opcion) {
 				
 				case "CREAR_CUENTA":
-
 					respuesta = EchoTCPServerProtocol.abrirCuenta(datos[1]);
 					EchoTCPServerProtocol.toNetwork.println(respuesta);
 					break;
@@ -109,7 +111,6 @@ public class mainServer {
 				case "CARGA":
 
 					try {
-
 						String nombreArchivo = datos[1];
 						ArrayList<String> lineas = LeerArchivo.leerArchivo(nombreArchivo);
 						EchoTCPServerProtocol.toNetwork.println(lineas);
@@ -119,7 +120,6 @@ public class mainServer {
 
 					break;
 
-				
 				} 
 			}else {
 				try {

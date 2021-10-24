@@ -19,7 +19,6 @@ public class mainClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public static void mostrarMenu() throws IOException {
@@ -53,17 +52,21 @@ public class mainClient {
 
 				switch (opcion) {
 				
+				//Crear una cuenta.
 				case 1:
 					try {
 						System.out.println("Ingrese su nombre: ");
 						String nombre = sn.nextLine();
-
+						
+						//.trim limpia el nombre ingresado, quitando los espacios del inicio y del final.
 						nombre.trim();
+						//Se establece la cadena de texto que posteriormente recibira el servidor.
 						fromUser = "CREAR_CUENTA" + "," + nombre;
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 
 						System.out.println();
 						
+						//Se lee e imprime la respuesta que haya enviado el servidor al cliente.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println(fromServer);
 						reiniciarConexion();
@@ -73,6 +76,7 @@ public class mainClient {
 					}
 					break;
 
+				//Apostar
 				case 2:
 
 					try {
@@ -85,12 +89,14 @@ public class mainClient {
 						
 						System.out.println("Ingrese el numero de la apuesta: ");
 						String numApuesta = sn.nextLine();
-
+						
+						//Se establece la cadena de texto que posteriormente recibira el servidor.
 						fromUser = "APOSTAR" + "," + numCuenta + "," + tipo + "," +numApuesta;
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 
 						System.out.println();
-
+						
+						//Se lee e imprime la respuesta que haya enviado el servidor al cliente.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println(fromServer);
 
@@ -102,6 +108,7 @@ public class mainClient {
 
 					break;
 
+				//Cerrar apuestas
 				case 3:
 					
 					String respuestaPregunta="";
@@ -109,30 +116,34 @@ public class mainClient {
 					String fromServer6="";
 
 					try {
-						
+						//Se envia al servidor la instruccion de CERRAR.
 						fromUser = "CERRAR";
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 						
+						//Se recibe la respuesta del servidor.
 						fromServer =EchoTCPClientProtocol.fromNetwork2.readLine();
 						
+						/*Se compara la respuesta del servidor, si entra a este if 
+						 * significa que no se han realizado apuestas hasta el momento. 
+						 * por ello se requiere la confirmacion de cerrarlas.*/
 						if(fromServer.contains("¿Está seguro de cerrar las apuestas?")) {
 							
 							System.out.println(fromServer);
 							System.out.println("Ingrese SI o NO: ");
 							respuestaPregunta = sn.nextLine();
 							
+							//Se envia la respuesta a la confirmacion
 							fromUser6 = respuestaPregunta;
 							EchoTCPClientProtocol.toNetwork2.println(fromUser6);
 							
 							System.out.println();
-
+							//Se recibe la respuesta del servidor.
 							fromServer6 = EchoTCPClientProtocol.fromNetwork.readLine();
 							System.out.println(fromServer6);
 							
 							reiniciarConexion();
 						
 						}else {
-							
 							System.out.println(fromServer);
 							reiniciarConexion();
 						}
@@ -141,30 +152,32 @@ public class mainClient {
 						e.printStackTrace();
 					}
 					break;
-
+				
+				//Reporte de apuestas
 				case 4:
 
 					String reporte="REPORTE DE APUESTAS \n";
 					String aux="";
 					
 					try {
-
 						fromUser = "REPORTAR";
+						//Se envia al servidor la instruccion REPORTAR.
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 						System.out.println();
-
+						
+						//Se recibe la respuesta del servidor.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						aux= fromServer;
 						
 						String reportes[] = aux.split("-");
 						
-						
+						//Se modifica la respuesta del servidor, para acomodarla visualmente.
 						for(int i=0;i<reportes.length;i++) {
 							
 							reporte += reportes[i] +"\n";
 						}
 						
-						
+						//Se imprime el reporte de las apuestas.
 						System.out.println(reporte);
 
 						reiniciarConexion();
@@ -175,6 +188,7 @@ public class mainClient {
 
 					break;
 					
+				//Sortear
 				case 5:
 
 					try {
@@ -182,13 +196,13 @@ public class mainClient {
 						System.out.println("Ingrese el numero a sortear: ");
 						int numGanador = sn.nextInt();
 						sn.nextLine();
-
+						//Se establece la instruccion que se enviara al servidor.
 						fromUser = "SORTEO" + "," + numGanador;
-						
+						//Se envia al servidor.
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 
 						System.out.println();
-
+						//Se lee la respuesta del servidor.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println( fromServer);
 
@@ -200,18 +214,20 @@ public class mainClient {
 
 					break;
 					
+				//Cancelar cuenta
 				case 6:
 
 					try {
 						System.out.println("Ingrese el numero de la cuenta: ");
 						int numCuentaA = sn.nextInt();
 						sn.nextLine();
-
+						
+						//Se establece y envia la instruccion al servidor
 						fromUser = "CANCELAR" + "," + numCuentaA;
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 
 						System.out.println();
-
+						//Se lee la respuesta del servidor.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println(fromServer);
 
@@ -222,6 +238,8 @@ public class mainClient {
 					}
 
 					break;
+					
+				//Depositar dinero en una cuenta
 				case 7:
 
 					try {
@@ -231,12 +249,14 @@ public class mainClient {
 
 						System.out.println("Ingrese el valor a depositar: ");
 						double valor = sn.nextDouble();
-
+						
+						//Se establece y envia la instruccion al servidor.
 						fromUser = "DEPOSITAR" + "," + numCuenta + "," + valor;
 						EchoTCPClientProtocol.toNetwork.println(fromUser);
 
 						System.out.println();
-
+						
+						//Se lee la respuesta del servidor.
 						fromServer = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println(fromServer);
 
@@ -248,6 +268,7 @@ public class mainClient {
 
 					break;
 					
+				//Retirar dinero en una cuenta
 				case 8:
 
 					try {
@@ -258,11 +279,13 @@ public class mainClient {
 						System.out.println("Ingrese el valor a retirar: ");
 						double valorR = sn.nextDouble();
 
+						//Se establece y envia una instruccion al servidor.
 						String fromUser2 = "RETIRAR" + "," + numCuentaR + "," + valorR;
 						EchoTCPClientProtocol.toNetwork.println(fromUser2);
 
 						System.out.println();
-
+						
+						//Se lee la respuesta del servidor.
 						String fromServer2;
 						fromServer2 = EchoTCPClientProtocol.fromNetwork.readLine();
 						System.out.println(fromServer2);
@@ -275,6 +298,7 @@ public class mainClient {
 
 					break;
 					
+				//Consultar saldo
 				case 9:
 
 					try {
@@ -297,6 +321,7 @@ public class mainClient {
 					}
 					break;
 
+				//Cargar datos
 				case 10:
 
 					try {
@@ -368,9 +393,11 @@ public class mainClient {
 				sn.next();
 			}
 		}
-
 	}
 
+	/* Despues de cada instruccion enviada al servidor, se reinicia la conexion para comprobar que no se 
+	 * ha seleccionado la opcion 11, que corresponde a salir.
+	 */
 	public static void reiniciarConexion() {
 		if (!salir) {
 			try {
@@ -379,9 +406,6 @@ public class mainClient {
 
 				e1.printStackTrace();
 			}
-
 		}
-
 	}
-
 }
